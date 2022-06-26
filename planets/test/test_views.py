@@ -33,5 +33,16 @@ class TestView(APITestCase):
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
     
-    
+    def test_list_planets(self):
+        Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest')
+        Planet.objects.create(name='test', climate='climatetest1', terrain='terraintest1', films_apparitions=3)
+
+        res = self.client.get(LIST_PLANET)
+
+        planets = Planet.objects.all()
+        serializer = PlanetSerializer(planets, many=True)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data, serializer.data)
+
 
