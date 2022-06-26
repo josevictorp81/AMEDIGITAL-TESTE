@@ -45,4 +45,14 @@ class TestView(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
+    def test_filter_planets_by_name(self):
+        Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest')
+        Planet.objects.create(name='test', climate='climatetest1', terrain='terraintest1', films_apparitions=3)
 
+        res = self.client.get('http://127.0.0.1:8000/api/planets/list?name=nametest')
+
+        planet = Planet.objects.get(name='test')
+        serializer = PlanetSerializer(planet)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(res.data), 1)
