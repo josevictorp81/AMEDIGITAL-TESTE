@@ -68,4 +68,11 @@ class TestView(APITestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
-        
+    
+    def test_delete_planet(self):
+        planet = Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest')
+
+        url = planet_view('delete-planet', planet.id)
+        res = self.client.delete(url)
+
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)

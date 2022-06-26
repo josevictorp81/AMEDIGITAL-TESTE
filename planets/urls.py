@@ -6,4 +6,5 @@ urlpatterns = [
     path('create', views.PlanetCreateAPIView.as_view(), name='create-planet'),
     path('list', views.PlanetListView.as_view(), name='list-planet'),
     path('list/<int:pk>', views.PlanetaRetrieveView.as_view(), name='list-planet-id'),
+    path('delete/<int:pk>', views.PlanetDestroyView.as_view(), name='delete-planet'),
 ]
