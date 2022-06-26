@@ -38,7 +38,7 @@ class TestView(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
     
     def test_list_planets(self):
-        Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest')
+        Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest', films_apparitions=1)
         Planet.objects.create(name='test', climate='climatetest1', terrain='terraintest1', films_apparitions=3)
 
         res = self.client.get(LIST_PLANET)
@@ -50,7 +50,7 @@ class TestView(APITestCase):
         self.assertEqual(res.data, serializer.data)
 
     def test_filter_planets_by_name(self):
-        Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest')
+        Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest', films_apparitions=1)
         Planet.objects.create(name='test', climate='climatetest1', terrain='terraintest1', films_apparitions=3)
 
         res = self.client.get('http://127.0.0.1:8000/api/planets/list?name=nametest')
@@ -59,7 +59,7 @@ class TestView(APITestCase):
         self.assertEqual(len(res.data), 1)
     
     def test_list_planet_id(self):
-        planet = Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest')
+        planet = Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest', films_apparitions=1)
         Planet.objects.create(name='test', climate='climatetest1', terrain='terraintest1', films_apparitions=3)
 
         url = planet_view('list-planet-id', planet.id)
@@ -70,7 +70,7 @@ class TestView(APITestCase):
         self.assertEqual(res.data, serializer.data)
     
     def test_delete_planet(self):
-        planet = Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest')
+        planet = Planet.objects.create(name='nametest', climate='climatetest', terrain='terraintest', films_apparitions=1)
 
         url = planet_view('delete-planet', planet.id)
         res = self.client.delete(url)
