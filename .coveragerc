@@ -1,0 +1,11 @@
+[run]
+source = .
+
+omit =
+    */venv/*
+    */amedigital/*
+    */tests/*
+    */migrations/*
+    */__init__.py
+    */apps.py
+    */manage.py
