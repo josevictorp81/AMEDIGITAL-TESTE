@@ -32,3 +32,7 @@ class PlanetListView(ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['name']
 
+
+class PlanetaRetrieveView(RetrieveAPIView):
+    queryset = Planet.objects.all()
+    serializer_class = PlanetSerializer
