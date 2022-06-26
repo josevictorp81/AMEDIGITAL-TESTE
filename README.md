@@ -42,6 +42,8 @@ python manage.py runserver
 /api/planets/delete/id_do_filme - deletar planeta
 ```
 
+Documetação dos endpoints: `/docs/` ou `/redoc/`.
+
 ## Frameworks e Bibliotecas
 
 - [Django](https://www.djangoproject.com/)
