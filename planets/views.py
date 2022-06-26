@@ -29,8 +29,14 @@ class PlanetCreateAPIView(CreateAPIView):
 class PlanetListView(ListAPIView):
     queryset = Planet.objects.all()
     serializer_class = PlanetSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['name']
+
+    def get(self, request, *args, **kwargs):
+        name = request.query_params.get('name')
+        if name is not None:
+            queryset = self.queryset.filter(name__icontains=name)
+            serializer = PlanetSerializer(queryset, many=True)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        return super().get(request, *args, **kwargs)
 
 
 class PlanetaRetrieveView(RetrieveAPIView):
