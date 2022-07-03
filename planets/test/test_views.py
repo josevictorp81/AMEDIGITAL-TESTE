@@ -21,7 +21,7 @@ class TestView(APITestCase):
 
         res = self.client.post(CREATE_PLANET ,payload)
 
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_planet_exists(self):
         payload = {'name': 'Tatooine', 'climate': 'arid', 'terrain': 'desert'}

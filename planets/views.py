@@ -18,6 +18,8 @@ class PlanetCreateAPIView(CreateAPIView):
         res = req['results']
         if res:
             quantity = len(req['results'][0]['films'])
+        else:
+            return Response(data={'detail': 'This planet do not exists in star wars universe!'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = self.serializer_class(data=data)
         if serializer.is_valid():
             serializer.save(films_apparitions=quantity)
